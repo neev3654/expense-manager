@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Management System</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <br>
+    <div class="logo">
+        <div class="mainlogo" style="font-size: 50px; font-weight: bolder;border-bottom: 5px black solid;border-radius: 10px;">X</div>
+        <div style="font-size: 27px;padding-top: 21px;font-weight: bold;">Xpenso</div>
+    </div>
+    <div class="role-selector">
+        <h3>Select Your Role:</h3>
+        <div class="role-buttons">
+            <button class="role-btn active" onclick="switchRole('employee')">Employee</button>
+            <button class="role-btn" onclick="switchRole('manager')">Manager</button>
+            <button class="role-btn" onclick="switchRole('admin')">Admin</button>
+        </div>
+    </div>
+
+    <div id="employeeSection" class="role-section" style="display: block;">
+        <header>
+            <nav>
+                <div class="buttons">
+                    <button class="new">New Expense</button>
+                </div>
+            </nav>
+            <div class="stats_section">
+                <div class="stats">
+                    <div class="stat">
+                        <div class="line1" id="toSubmitAmount">₹0</div>
+                        <div class="line2">To submit</div>
+                    </div>
+                    <div class="stat">
+                        <div class="line1" id="waitingApprovalAmount">₹0</div>
+                        <div class="line2">Waiting approval</div>
+                    </div>
+                    <div class="stat">
+                        <div class="line1" id="approvedAmount">₹0</div>
+                        <div class="line2">Approved</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Paid By</th>
+                    <th>Remarks</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="expenseTable">
+            </tbody>
+        </table>
+
+        <div id="expenseModal" class="modal">
+            <div class="modal-content">
+                <div class="top">
+                    <button class="attach">Attach Receipt</button>
+                    <div class="toptxt">Draft → Waiting approval → Approved</div>
+                </div>
+                <div class="main">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="input">
+                                <label for="employee">Employee</label>
+                                <select id="employee" required>
+                                    <option value="">Select Employee</option>
+                                    <!-- Employees will be populated from user management -->
+                                </select>
+                            </div>
+                            <div class="input">
+                                <label for="category">Category</label>
+                                <input type="text" id="category" placeholder="Enter category" required>
+                            </div>
+                            <div class="input">
+                                <label for="total_amount">Total Amount (₹)</label>
+                                <input type="number" id="total_amount" placeholder="Enter amount" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="input">
+                                <label for="date">Expense Date</label>
+                                <input type="date" id="date" required>
+                            </div>
+                            <div class="input">
+                                <label for="paidby">Paid by</label>
+                                <input type="text" id="paidby" placeholder="How was it paid?">
+                            </div>
+                            <div class="input">
+                                <label for="remarks">Remarks</label>
+                                <input type="text" id="remarks" placeholder="Any remarks">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Enter expense description"></textarea>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="submit">Submit Expense</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="managerSection" class="role-section">
+        <div class="manager-panel">
+            <h2>Manager Dashboard</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="line1" id="pendingAmount">₹0</div>
+                    <div class="line2">Pending Approval</div>
+                </div>
+                <div class="stat-card">
+                    <div class="line1" id="pendingCount">0</div>
+                    <div class="line2">Pending Requests</div>
+                </div>
+            </div>
+
+            <h3>Pending Expenses for Approval</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Amount (₹)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="teamExpensesTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="adminSection" class="role-section">
+        <div class="admin-panel">
+            <h2>Admin Dashboard - User Management</h2>
+
+            <div class="user-management">
+                <h3>User Management</h3>
+                <button onclick="showAddUserForm()" class="action-btn btn-approve">Add New User</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+
+</body>
+</html>
